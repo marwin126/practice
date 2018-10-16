@@ -19,15 +19,20 @@ def select():
         #print(list)
         for line in list:
             #print(line.strip().split()[0])
-            if user_choice == line.strip().split()[0]:
-                print(user_choice, "的工资是：", line.split()[1])
+            #空行
+            if line == '\n':
+                line = line.strip("\n")
+            else:
+                if user_choice == line.strip().split()[0]:
+                    print(user_choice, "的工资是：", line.split()[1])
 
 #增加
 def add():
     with open('info.txt', 'a') as f:
         user_add = input("请输入要增加的员工姓名和工资（例如：Eric 100000）：")
         #f.seek(0,2)
-        f.write('\n'+user_add)
+        #f.write('\n'+user_add)
+        f.write(user_add+'\n')
         print("增加成功")
 
 #删除
@@ -37,9 +42,13 @@ def delete():
         list=f1.readlines()
     with open('info.txt','w') as f2:
         for l in list:
-            if user_del != l.strip().split()[0]:
-               # print(l)
-                f2.write(l)
+            #空行
+            if l == '\n':
+                l=l.strip('\n')
+            else:
+                if user_del != l.strip().split()[0]:
+                    # print(l)
+                    f2.write(l)
 
 
 #更新
@@ -49,11 +58,15 @@ def update():
         list=f1.readlines()
     with open('info.txt','w') as f2:
         for l in list:
-            if user_update.split()[0] != l.strip().split()[0]:
-               # print(l)
-                f2.write(l)
+            # 空行
+            if l == '\n':
+                l = l.strip('\n')
             else:
-                f2.write(user_update)
+                if user_update.split()[0] != l.strip().split()[0]:
+                   # print(l)
+                    f2.write(l)
+                else:
+                    f2.write(user_update+'\n')
 
 while True:
     chioce = '''
